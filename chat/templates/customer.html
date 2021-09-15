@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<nav class="navbar navbar-dark bg-dark justify-content-between">
+    <a class="navbar-brand">
+        <h5 style="color: white" > Hello, {{ user.username }} your role is customer</h5>
+    </a>
+    <div class="form-inline">
+        <a href="{% url 'logout' %}"><button class="btn btn-light" style=" font-style:italics; font-weight:bold">Logout</button></a>
+    </div>
+</nav>
+
+<div class="notes-body">
+
+    <div class="band mt-4"><strong>My NoteBook</strong>
+        <a href="{% url 'new' %}">
+            <button type="button" class="btn btn-primary" id="addBtn"><i class="fas fa-plus"></i></button>
+        </a>
+    </div>
+
+
+    <ol class="list-group">
+        <span class="mb-0 text-muted">
+            {% if message %}
+                {{message}}
+            {% endif %}
+        </span>
+
+        {% for note in notes %}
+        <a href="{% url 'note' note.id %}">
+
+        <li class="list-group-item">
+            <div class="noteContainer">
+
+                <div id="headingAndIconsContainer">
+                    <div class=""><h4><strong>{{ note.heading }}</strong></h4></div>
+                    <div id="icons">
+                        <a href="{% url 'note' note.id %}">
+                            <span class="span"><button class="btn btn-primary icons"><i class="fas fa-pen"></i></button></span>
+                        </a>
+                        <a href="{% url 'delete' note.id %}">
+                            <span class="span"><button class="btn btn-danger icons"><i class="fas fa-trash-alt"></i></button></span>
+                        </a>
+                    </div>
+                </div>
+
+                <div id="notes">
+                    <p> {{ note.text | truncatechars:"100" }}</p>
+                </div>
+                <p style="float: right; font-size:12px"><strong> {{ note.time }}</strong></p>
+            </div>
+        </li>
+
+        </a>
+        {% endfor%}
+    </ol>
+
+</div>
+
+{% endblock %}

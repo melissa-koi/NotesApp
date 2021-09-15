@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load bootstrap5 %}
+{% block content %}
+
+<div class="notes-body mt-5">
+
+    <div id="updateForm">
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-md-6 contents form-block" style="border: 1px solid rgba(0,0,0,.125) !important;">
+                        {% bootstrap_form form%}
+                        <div class="container" style="text-align: center;">
+                            <input class="btn btn-primary" type="submit" style="width:35%; height: 50px; display: inline-block" value="Save">
+                            <input class="btn btn-dark" type="submit" style="width:35%; height: 50px; display: inline-block" name="cancel" value="Cancel" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+</div>
+{% endblock %}

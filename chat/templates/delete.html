@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load bootstrap5 %}
+{% block content %}
+
+<div class="notes-body">
+    {% if request.user.is_admin %}
+        <a href="{% url 'adminpage' %}">
+            <button class="btn btn-primary" id="addBtn"><i class="fas fa-arrow-left"></i></button>
+        </a>
+    {% else %}
+        <a href="{% url 'customerPage' %}">
+            <button class="btn btn-primary" id="addBtn"><i class="fas fa-arrow-left"></i></button>
+        </a>
+    {% endif %}
+
+    <div id="updateForm">
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-md-6 contents form-block" style="border: 1px solid rgba(0,0,0,.125) !important;">
+                        {% bootstrap_form form%}
+                        <input class="btn btn-danger" type="submit" style="width:100%" value="Delete">
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+</div>
+{% endblock %}
